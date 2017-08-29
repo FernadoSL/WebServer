@@ -14,9 +14,21 @@ namespace WebServer.Server
 
         public string[] HeaderSplited { get; private set; }
 
-        public string StatusCode { get { return this.HeaderSplited[1]; } }
+        public string StatusCode
+        {
+            get
+            {
+                return this.HeaderSplited[1];
+            }
+        }
 
-        public string Status { get { return this.HeaderSplited[2]; } }
+        public string Status
+        {
+            get
+            {
+                return this.HeaderSplited[2];
+            }
+        }
 
         public Response(string header, string statusCode, string status, string body)
         {
@@ -24,7 +36,7 @@ namespace WebServer.Server
             this.HeaderSplited = header.Split(' ');
             this.HeaderSplited[1] = statusCode;
             this.HeaderSplited[2] = status;
-            this.Header = String.Join(" ", this.HeaderSplited);
+            this.Header = string.Join(" ", this.HeaderSplited);
             this.AllText = this.Header + body;
         }
 

@@ -12,16 +12,26 @@
 
         public string[] HeaderSplited { get; private set; }
 
-        public string HttpMethod { get { return this.HeaderSplited[0]; } }
+        public string HttpMethod
+        {
+            get
+            {
+                return this.HeaderSplited[0];
+            }
+        }
 
         public string Url
         {
             get
             {
                 if (this.HeaderSplited.Length > 1)
+                {
                     return this.HeaderSplited[1];
+                }
                 else
+                {
                     return string.Empty;
+                }   
             }
         }
         

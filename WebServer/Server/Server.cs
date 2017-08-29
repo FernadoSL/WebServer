@@ -8,7 +8,7 @@ namespace WebServer.Server
 {
     public static class Server
     {
-        //Locais das views e templates
+        // Locais das views e templates
         private const string IndexRequest = @"/";
         private const string RootLocal = @"C:..\..\Views";
         private const string HeaderTemplateLocal = @"C:..\..\..\headerTemplate.txt";
@@ -20,7 +20,7 @@ namespace WebServer.Server
             string method = clientRequest.HttpMethod.ToUpper();
             string url = clientRequest.Url;
 
-            if (!String.IsNullOrEmpty(method) && !String.IsNullOrEmpty(url) && method.Equals(Http.Get))
+            if (!string.IsNullOrEmpty(method) && !string.IsNullOrEmpty(url) && method.Equals(Http.Get))
             {
                 string viewLocal;
 
@@ -35,9 +35,8 @@ namespace WebServer.Server
 
                 response = CreateResponse(viewLocal);
             }
-            else if (!String.IsNullOrEmpty(method) && method.Equals(Http.Post))
+            else if (!string.IsNullOrEmpty(method) && method.Equals(Http.Post))
             {
-
             }
             else
             {
@@ -64,9 +63,9 @@ namespace WebServer.Server
                 responseCode = (int)HttpStatusCode.NotFound;
                 responseStatus = HttpStatusCode.NotFound.ToString();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                //implementar retorno de erro no servidor
+                // implementar retorno de erro no servidor
             }
 
             Response result = new Response(header, responseCode.ToString(), responseStatus, body);
@@ -74,6 +73,5 @@ namespace WebServer.Server
 
             return result;
         }
-
     }
 }
