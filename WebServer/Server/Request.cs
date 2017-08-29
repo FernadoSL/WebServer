@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace WebServer.Server
+﻿namespace WebServer.Server
 {
     public class Request
     {
