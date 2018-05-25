@@ -1,9 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Net;
-using System.Net.Http;
-using WebServer.Helpers;
-using static System.Net.WebRequestMethods;
+﻿using System.Net.Http;
 
 namespace WebServer.Server
 {

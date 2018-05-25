@@ -43,7 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helpers\FileReader.cs" />
+    <Compile Include="Helpers\DataAccess.cs" />
+    <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="Server\Request.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
