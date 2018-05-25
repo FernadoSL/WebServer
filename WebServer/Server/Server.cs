@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using WebServer.Helpers;
 using static System.Net.WebRequestMethods;
 
@@ -8,69 +9,98 @@ namespace WebServer.Server
 {
     public static class Server
     {
-        // Locais das views e templates
-        private const string IndexRequest = @"/";
-        private const string RootLocal = @"C:..\..\Views";
-        private const string HeaderTemplateLocal = @"C:..\..\..\headerTemplate.txt";
-        private const string NotFoundViewLocal = @"C:..\..\Views\notFoundView.html";
+        private const string ReadByKey = @"/Read/Key=";
+        private const string ReadAllRequest = @"/ReadAll";
+
+        private const string InsertRequest = @"/Insert";
+        private const string UpdateAllRequest = @"/UpdateAll";
+
+
 
         public static Response ReceiveAndRespond(Request clientRequest)
         {
-            Response response = null;
             string method = clientRequest.HttpMethod.ToUpper();
             string url = clientRequest.Url;
 
-            if (!string.IsNullOrEmpty(method) && !string.IsNullOrEmpty(url) && method.Equals(Http.Get))
+            if (method.Equals(HttpMethod.Get))
             {
-                string viewLocal;
-
-                if (url.Equals(IndexRequest))
-                {
-                    viewLocal = RootLocal + "\\index.html";
-                }
-                else
-                {
-                    viewLocal = RootLocal + url.Replace("/", "\\");
-                }
-
-                response = CreateResponse(viewLocal);
+                return Get(url);
             }
-            else if (!string.IsNullOrEmpty(method) && method.Equals(Http.Post))
+
+            if (method.Equals(HttpMethod.Post))
             {
+                return Post(url);
             }
-            else
+
+            if (method.Equals(HttpMethod.Put))
             {
-                response = null;
+                return Put();
+            }
+
+            if (method.Equals(HttpMethod.Delete))
+            {
+                return Delete();
+            }
+
+            return new Response("", "404", "Not Found", "");
+        }
+
+        private static Response Get(string url)
+        {
+            Response response = null;
+
+            if (url.Contains(ReadByKey))
+            {
+                // ler um registro buscado por chave.
+            }
+
+            if (url.Equals(ReadAllRequest))
+            {
+                // ler todos registros.
             }
 
             return response;
         }
 
-        private static Response CreateResponse(string viewLocal)
+        private static Response Post(string url)
         {
-            string header = FileReader.Read(HeaderTemplateLocal);
-            string body = string.Empty;
-            int responseCode = (int)HttpStatusCode.OK;
-            string responseStatus = HttpStatusCode.OK.ToString();
+            Response response = null;
 
-            try
+            if (url.Equals(InsertRequest))
             {
-                body = FileReader.Read(viewLocal);
-            }
-            catch (FileNotFoundException)
-            {
-                body = FileReader.Read(NotFoundViewLocal);
-                responseCode = (int)HttpStatusCode.NotFound;
-                responseStatus = HttpStatusCode.NotFound.ToString();
-            }
-            catch (Exception)
-            {
-                // implementar retorno de erro no servidor
+                // inser novo registro.
             }
 
-            Response result = new Response(header, responseCode.ToString(), responseStatus, body);
-            result.FormatResponse();
+            if (url.Equals(UpdateAllRequest))
+            {
+                // atualiza todos os registros.
+            }
 
+            return response;
+        }
+
+        private static Response Put()
+        {
+            Response response = null;
+
+            // atualiza um registro;
+
+            return response;
+        }
+
+        private static Response Delete()
+        {
+            Response response = null;
+
+            // deleta um registro.
+
+            return response;
+        }
+
+        private static Response CreateResponse()
+        {
+            Response result = null;
+            
             return result;
         }
     }
