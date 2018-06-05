@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Factories\HttpResponseFactory.cs" />
     <Compile Include="Helpers\DataAccess.cs" />
     <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="Server\Request.cs" />
@@ -50,16 +51,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Server\Response.cs" />
     <Compile Include="Server\Server.cs" />
-    <Compile Include="Helpers\SocketFactory.cs" />
+    <Compile Include="Factories\SocketFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\index.html" />
-    <Content Include="Views\notFoundView.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

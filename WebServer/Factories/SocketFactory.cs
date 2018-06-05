@@ -1,6 +1,6 @@
 ﻿using System.Net.Sockets;
 
-namespace WebServer
+namespace WebServer.Factories
 {
     public static class SocketFactory
     {

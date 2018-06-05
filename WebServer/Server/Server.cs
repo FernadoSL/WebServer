@@ -1,60 +1,78 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
+using WebServer.Factories;
+using WebServer.Helpers;
 
 namespace WebServer.Server
 {
-    public static class Server
+    public class Server
     {
+        private const string PingRequest = @"/";
         private const string ReadByKey = @"/Read/Key=";
         private const string ReadAllRequest = @"/ReadAll";
 
         private const string InsertRequest = @"/Insert";
         private const string UpdateAllRequest = @"/UpdateAll";
 
+        private static DataAccess DataAccess { get; set; }
 
-
+        private static HttpResponseFactory HttpResponseFactory = new HttpResponseFactory();
+        
         public static Response ReceiveAndRespond(Request clientRequest)
         {
             string method = clientRequest.HttpMethod.ToUpper();
             string url = clientRequest.Url;
 
-            if (method.Equals(HttpMethod.Get))
+            if (method.Equals(HttpMethod.Get.Method))
             {
                 return Get(url);
             }
 
-            if (method.Equals(HttpMethod.Post))
+            if (method.Equals(HttpMethod.Post.Method))
             {
                 return Post(url);
             }
 
-            if (method.Equals(HttpMethod.Put))
+            if (method.Equals(HttpMethod.Put.Method))
             {
                 return Put();
             }
 
-            if (method.Equals(HttpMethod.Delete))
+            if (method.Equals(HttpMethod.Delete.Method))
             {
                 return Delete();
             }
 
-            return new Response("", "404", "Not Found", "");
+            return HttpResponseFactory.CreateNotFound();
         }
 
         private static Response Get(string url)
         {
-            Response response = null;
+            if(url.Equals(PingRequest))
+            {
+                return HttpResponseFactory.CreateOk("");
+            }
 
             if (url.Contains(ReadByKey))
             {
-                // ler um registro buscado por chave.
+                string key = url.Substring(url.IndexOf('=') + 1);
+                string register = DataAccess.GetByKey(key);
+
+                return HttpResponseFactory.CreateOk(register);
             }
 
             if (url.Equals(ReadAllRequest))
             {
-                // ler todos registros.
+                List<string> registerList = DataAccess.AllData;
+                string result = string.Empty;
+                registerList.ForEach(register => result = result + '\n' + register);
+
+                return HttpResponseFactory.CreateOk(result);
             }
 
-            return response;
+            return HttpResponseFactory.CreateNotFound();
         }
 
         private static Response Post(string url)
@@ -90,13 +108,6 @@ namespace WebServer.Server
             // deleta um registro.
 
             return response;
-        }
-
-        private static Response CreateResponse()
-        {
-            Response result = null;
-            
-            return result;
         }
     }
 }

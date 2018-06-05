@@ -2,6 +2,7 @@
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using WebServer.Factories;
 using WebServer.Server;
 
 namespace WebServer
@@ -15,7 +16,7 @@ namespace WebServer
 
             // Get das informações de rede dinamicamente
             IPHostEntry ipHostInfo = Dns.GetHostEntry(Dns.GetHostName());
-            IPAddress ipAddress = ipHostInfo.AddressList[1];
+            IPAddress ipAddress = ipHostInfo.AddressList[0];
             IPEndPoint localEndPoint = new IPEndPoint(ipAddress, portNumber);
 
             // Criação do socket
