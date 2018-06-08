@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebServer", "WebServer\WebS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebServer.Test", "WebServer.Test\WebServer.Test.csproj", "{E960F1DB-EB55-4FBA-8093-10DDE657C7DC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebServer.Web", "WebServer.Web\WebServer.Web.csproj", "{A7CD06F0-E550-40EE-8C4D-7DFCEDA357A7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{E960F1DB-EB55-4FBA-8093-10DDE657C7DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E960F1DB-EB55-4FBA-8093-10DDE657C7DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E960F1DB-EB55-4FBA-8093-10DDE657C7DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7CD06F0-E550-40EE-8C4D-7DFCEDA357A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7CD06F0-E550-40EE-8C4D-7DFCEDA357A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7CD06F0-E550-40EE-8C4D-7DFCEDA357A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7CD06F0-E550-40EE-8C4D-7DFCEDA357A7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
