@@ -31,18 +31,15 @@ namespace WebServer.Web.Controllers
         {
             return this.DataAccess.GetByKey(key);
         }
-        
-        // POST api/values
-        [HttpPost("/Insert")]
-        public void Insert([FromBody]string value)
-        {
-            string key = (this.DataAccess.AllData.Count + 1).ToString();
 
-            this.DataAccess.Insert(key, value);
+
+        [HttpPost("/Insert")]
+        public void Insert([FromBody]string data)
+        {
+            this.DataAccess.Insert(data.GetKey(), data.GetValue());
             this.DataAccess.SaveChanges();
         }
 
-        // PUT api/values/5
         [HttpPut("{key}")]
         public void Put(string key, [FromBody]string value)
         {
@@ -50,11 +47,24 @@ namespace WebServer.Web.Controllers
             this.DataAccess.SaveChanges();
         }
 
-        // DELETE api/values/5
         [HttpDelete("{key}")]
         public void Delete(string key)
         {
             this.DataAccess.Delete(key);
+            this.DataAccess.SaveChanges();
+        }
+
+        [HttpPost("UpdateAll")]
+        public void UpdateAll([FromBody]List<string> allData)
+        {
+            this.DataAccess.Truncate();
+            this.DataAccess.SaveChanges();
+
+            foreach (var data in allData)
+            {
+                this.DataAccess.Insert(data.GetKey(), data.GetValue());
+            }
+
             this.DataAccess.SaveChanges();
         }
     }
